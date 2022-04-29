@@ -6,10 +6,10 @@ disp(pwd)
 I = imread('D:\project\MAIN PROJECT\Matlab-Project\TestImages\Lena.tiff');
 origin_I = double(im2gray(I));
 % String to encrypt:
-D = double('Very secret string Ashwin J');
+D = double('Very secret data');
 D = de2bi(D,8).';
 D = D(:).';
-num=216
+num=length(D)
 %D=data
 %% Set image encryption key and data encryption key
 Image_key = 1;
@@ -28,11 +28,7 @@ if num_emD > 0 % means there is room to embed data
         %---------------Data Decryption----------------%
         [exD] = Encrypt_Data(Encrypt_exD,Data_key);
         % Decrypted string
-        rand('seed',Data_key); % set the seed
-        E = round(rand(1,numel(Encrypt_exD))*1);
-        decrypted = char(sum(reshape(bitxor(Encrypt_exD,E),8,[]).*(2.^(0:7)).'))
-        % decrypted = 'Very secret string'
-        disp("decrypted")
+        [decrypted]=Decrypt(Encrypt_exD,Data_key)
         disp(decrypted)
 %---------------Image Recovery----------------%
         [recover_I] = Recover_Image(stego_I,Image_key,Side_Information,Refer_Value,Map_I,num,ref_x,ref_y);
@@ -565,10 +561,16 @@ function [Encrypt_D] = Encrypt_Data(D,Data_key)
 % Encryption binary array
 rand('seed',Data_key); % set the seed
 E = round(rand(1,numel(D))*1);
-Encrypt_D=D
 % crypted string
  Encrypt_D = bitxor(D,E);
-disp(length(Encrypt_D))
+end
+function [Decrypted_data]=Decrypt(Encrypt_exD,Data_key)
+        %input:Encrypted data, key
+        %Output:Decrypted data
+        rand('seed',Data_key); % set the seed
+        E = round(rand(1,numel(Encrypt_exD))*1);
+        %Decryption using XOR
+        Decrypted_data = char(sum(reshape(bitxor(Encrypt_exD,E),8,[]).*(2.^(0:7)).'))
 end
 function [Code,Code_Bin] = Huffman_Code(num_Map_origin_I)
 % Function description: use variable-length encoding (multi-bit 0/1 encoding) to represent the marker category of pixel values
