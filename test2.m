@@ -1,77 +1,44 @@
 callMain=Main();
-function [test]=Main()
-clear
-clc
-disp(pwd)
-I = imread('D:\project\MAIN PROJECT\Matlab-Project\TestImages\Lena.tiff');
-origin_I = double(im2gray(I));
-% String to encrypt:
-D = double('Very secret data');
-D = de2bi(D,8).';
-D = D(:).'; 
-num=length(D)
-%D=data
-%% Set image encryption key and data encryption key
-Image_key = 1;
-Data_key = 2;
-%% Set parameters (convenient for experiment modification)
-ref_x = 1; % the number of rows used as reference pixels
-ref_y = 1; % the number of columns used as reference pixels
-%% Image encryption and data embedding
-[encrypt_I,stego_I,emD] = Encrypt_Embed(origin_I,D,Image_key,Data_key,ref_x,ref_y);
-%% Data Extraction and Image Recovery
-num_emD = length(emD);
-if num_emD > 0 % means there is room to embed data
-    %-------Extract information in encrypted marked image-------%
-    [Side_Information,Refer_Value,Encrypt_exD,Map_I,sign] = Extract_Data(stego_I,num,ref_x,ref_y);
-    if sign == 1 % indicates that auxiliary information can be completely extracted
-        %---------------Data Decryption----------------%
-        [exD] = Encrypt_Data(Encrypt_exD,Data_key);
+function [test2]=Main()
+    clear
+    clc
+    test2="Hi"
+    data='This is very secret data'
+    I = imread('D:\project\MAIN PROJECT\Matlab-Project\TestImages\Lena.tiff');
+    %Encryption and Embedding
+    [stego_I,num]=EncryptMain(data,I,111,222);
+    %Decryption and extraction
+    [decrypted,recover_I]=DecryptMain(stego_I,num,111,222);
+    disp(decrypted)
+    imshow(recover_I,[])
+end
+function [stego_I,num]=EncryptMain(data,originalImage,imgKey,dataKey)
+            origin_I = double(im2gray(originalImage));
+            % String to encrypt:
+            D = double(data);
+            D = de2bi(D,8).';
+            D = D(:).'; 
+            num=length(D)
+            %% Set image encryption key and data encryption key
+            Image_key = imgKey;
+            Data_key = dataKey;
+            %% Set parameters (convenient for experiment modification)
+            ref_x = 1; % the number of rows used as reference pixels
+            ref_y = 1; % the number of columns used as reference pixels
+            %% Image encryption and data embedding
+            [encrypt_I,stego_I,emD] = Encrypt_Embed(origin_I,D,Image_key,Data_key,ref_x,ref_y);
+end
+function [decrypted,recover_I]=DecryptMain(stego_I,num,Image_key,Data_key)
+%input:Encrypted and embedded image and number of dimensions
+%output:Decrypted data and image
+        ref_x=1;
+        ref_y=1;
+        %-------Extract information in encrypted marked image-------%
+        [Side_Information,Refer_Value,Encrypt_exD,Map_I,sign] = Extract_Data(stego_I,num,ref_x,ref_y);
         % Decrypted string
         [decrypted]=Decrypt(Encrypt_exD,Data_key)
-        disp(decrypted)
-%---------------Image Recovery----------------%
+         %---------------Image Recovery----------------%
         [recover_I] = Recover_Image(stego_I,Image_key,Side_Information,Refer_Value,Map_I,num,ref_x,ref_y);
-        %---------------Image comparison----------------%
-        figure;
-        subplot(221);imshow(origin_I,[]);title('The original image');
-        subplot(222);imshow(encrypt_I,[]);title('encrypted image');
-        subplot(223);imshow(stego_I,[]);title('Confidential image');
-        subplot(224);imshow(recover_I,[]);title('restore image');
-        %---------------Result record----------------%
-        [m,n] = size(origin_I);
-        bpp = num_emD/(m*n);
-        %---------------Result judgment----------------%
-        check1 = isequal(emD,exD);
-        check2 = isequal(origin_I,recover_I);
-        if check1 == 1
-            disp('Extracting data is exactly the same as embedding data!')
-        else
-            disp('Warning! Data extraction error!')
-        end
-        if check2 == 1
-            disp('The reconstructed image is exactly the same as the original!')
-        else
-            disp('Warning! Image reconstruction error!')
-        end
-        %---------------Result output----------------%
-        if check1 == 1 && check2 == 1
-            disp(['Embedding capacity equal to : ' num2str(num_emD)])
-            disp(['Embedding rate equal to : ' num2str(bpp)])
-            fprintf(['The test image------------ OK','\n\n']);
-        else
-            fprintf(['The test image------------ ERROR','\n\n']);
-        end
-    else
-        disp('Unable to extract all auxiliary information!')
-        fprintf(['The test image------------ ERROR','\n\n']);
-    end
-else
-    disp('The auxiliary information is larger than the total embedded amount, so the data cannot be stored!')
-    fprintf(['The test image------------ ERROR','\n\n']);
-end
-
-test="hi"
 end
 function value = Binary_Decimalism(bin2_8)
 % Convert a binary array to a decimal integer
