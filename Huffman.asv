@@ -45,7 +45,7 @@ if num_emD > 0 % means there is room to embed data
          imshow(recover_I,[])
          outputFolder='DecryptedImages'
                 outputFileName = fullfile(outputFolder, ['decryptedImg' num2str("1") '.tiff']);
-                imwrite(recover_I,outputFileName);
+                imwrite(uint8(recover_I),outputFileName);
         %---------------Image comparison----------------%
         figure;
         subplot(221);imshow(origin_I,[]);title('The original image');

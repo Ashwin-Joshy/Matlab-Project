@@ -8,7 +8,8 @@ function [test2]=Main()
     %Encryption and Embedding
     [stego_I,num]=EncryptMain(data,I,111,222);
     %Decryption and extraction
-    [decrypted,recover_I]=DecryptMain(stego_I,num,111,222);
+    I = imread('D:\project\MAIN PROJECT\Matlab-Project\FinalImages\finalImage1.tiff');
+    [decrypted,recover_I]=DecryptMain(I,32,1,2);
     disp(decrypted)
     imshow(recover_I,[])
 end
