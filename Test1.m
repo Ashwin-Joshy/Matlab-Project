@@ -8,11 +8,13 @@ function [avg1] = encryption()
    numberOfOriginalVideoFrames=size(originalVideoFramePath,1);
    disp(numberOfOriginalVideoFrames)
    count11=1
-   for loop1=1:numberOfOriginalVideoFrames
+   for loop1=1:1%numberOfOriginalVideoFrames
         filename = ['frames\original\' num2str(loop1) '.jpg'];%Secret Image path
         S=imread(filename);%Reading to S
         filename = ['frames\target\' num2str(loop1) '.jpg']; %Target Image path
-        T=imread(filename);   %Reading to T                
+        T=imread(filename);   %Reading to T     
+        T=im2gray(T)
+        S=im2gray(S)
         %Stage 1. fitting the tile images into the target blocks.
         M=1024;
         N=720;
