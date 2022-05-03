@@ -102,7 +102,7 @@ function [avg1] = encryption()
    avg1=0;
 end
 function [avg] = decryption()
-             Mosaic=imread('DecryptedImages\decryptedImg1.tiff');
+             Mosaic=imread('frames\encryptedVideoFrames\25.tiff');
              n=4;
             [M,N,ch]=size(Mosaic);
             numberOfblocks=M*N/n^2;

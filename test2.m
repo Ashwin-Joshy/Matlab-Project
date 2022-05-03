@@ -1,17 +1,19 @@
 callMain=Main();
 function [test2]=Main()
-    clear
-    clc
     test2="Hi"
     data='This is very secret data'
-    I = imread('D:\project\MAIN PROJECT\Matlab-Project\TestImages\Lena.tiff');
+  %  I = imread('D:\project\MAIN PROJECT\Matlab-Project\TestImages\Lena.tiff');
     %Encryption and Embedding
-    [stego_I,num]=EncryptMain(data,I,111,222);
+  %  [stego_I,num]=EncryptMain(data,I,111,222);
     %Decryption and extraction
-    I = imread('D:\project\MAIN PROJECT\Matlab-Project\FinalImages\finalImage1.tiff');
+    I = imread('D:\project\MAIN PROJECT\Matlab-Project\frames\encryptedVideoFrames\22.tiff');
+    I=uint16(I)
     [decrypted,recover_I]=DecryptMain(I,32,1,2);
     disp(decrypted)
-    imshow(recover_I,[])
+    imshow(uint8(recover_I))
+    outputFolder='DecryptedImages'
+    outputFileName = fullfile(outputFolder, ['mosaic' num2str("1") '.tiff']);
+    imwrite(uint8(recover_I),outputFileName);
 end
 function [stego_I,num]=EncryptMain(data,originalImage,imgKey,dataKey)
             origin_I = double(im2gray(originalImage));
