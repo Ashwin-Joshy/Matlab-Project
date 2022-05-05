@@ -138,6 +138,7 @@ if length(len_Bin) < max
 end
 %% Auxiliary information required for statistics recovery (Code_Bin, len_Bin, Map_Bin)
 Side_Information = [Code_Bin,len_Bin,Map_Bin];
+disp(len_Bin)
 %% encrypt the original image origin_I
 [encrypt_I] = Encrypt_Image(origin_I,Image_key);
 %% embed information in Encrypt_I

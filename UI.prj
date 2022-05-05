@@ -1,17 +1,17 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="D:\project\MAIN PROJECT\Matlab-Project\UI.prj" location="D:\project\MAIN PROJECT\Matlab-Project" name="UI" target="target.ezdeploy.standalone" target-name="Application Compiler">
-    <param.appname>UI</param.appname>
+  <configuration build-checksum="583014410" file="D:\project\Main Project\Matlab-Project\UI.prj" location="D:\project\Main Project\Matlab-Project" name="UI" preferred-package-location="D:\project\Main Project\Matlab-Project\UI\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>BITRAIT</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
-    <param.authnamewatermark>q</param.authnamewatermark>
+    <param.authnamewatermark>Hello</param.authnamewatermark>
     <param.email />
-    <param.company />
+    <param.company>aaa</param.company>
     <param.summary>qwewqe</param.summary>
     <param.description />
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\UI\</param.installpath.string>
+    <param.installpath.string>\aaa\BITRAIT\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -47,7 +47,6 @@
       <param.icons />
       <param.version />
       <param.email />
-      <param.company />
       <param.description />
       <param.screenshot />
       <param.guid />
@@ -83,13 +82,12 @@
     <fileset.resources />
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}\DecryptedData.txt</file>
       <file>${PROJECT_ROOT}\hacker-g88cd2f243_1920.jpg</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\UI\for_testing" name="UI.exe" optional="false">D:\project\MAIN PROJECT\Matlab-Project\UI\for_testing\UI.exe</file>
-      <file location="${PROJECT_ROOT}\UI\for_testing" name="splash.png" optional="false">D:\project\MAIN PROJECT\Matlab-Project\UI\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\UI\for_testing" name="readme.txt" optional="true">D:\project\MAIN PROJECT\Matlab-Project\UI\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\UI\for_testing" name="splash.png" optional="false">D:\project\Main Project\Matlab-Project\UI\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\UI\for_testing" name="readme.txt" optional="true">D:\project\Main Project\Matlab-Project\UI\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\UI\for_testing" name="BITRAIT.exe" optional="false">D:\project\Main Project\Matlab-Project\UI\for_testing\BITRAIT.exe</file>
     </build-deliverables>
     <workflow />
     <matlab>
@@ -100,8 +98,8 @@
         <toolbox name="gpucoder" />
         <toolbox name="fixedpoint" />
         <toolbox name="matlabhdlcoder" />
-        <toolbox name="polyspacebugfinder" />
         <toolbox name="neuralnetwork" />
+        <toolbox name="polyspacebugfinder" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
@@ -129,14 +127,14 @@
         </matlabhdlcoder>
       </toolbox>
       <toolbox>
-        <polyspacebugfinder>
-          <enabled>true</enabled>
-        </polyspacebugfinder>
-      </toolbox>
-      <toolbox>
         <neuralnetwork>
           <enabled>true</enabled>
         </neuralnetwork>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
       </toolbox>
     </matlab>
     <platform>
